@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
+  id       String   @id @default(uuid())
+  name     String
+  capacity Int
+  price    Int
+  currency String
+  availabilities Availability[]
+  bookings Booking[]
+}
+
+model Availability {
+  id          String   @id @default(uuid())
+  localDate   DateTime
+  status      String
+  vacancies   Int
+  available   Boolean
+  product     Product  @relation(fields: [productId], references: [id])
+  productId   String
+  bookings    Booking[]
+}
+
+model Booking {
+  id             String   @id @default(uuid())
+  status         String
+  product        Product  @relation(fields: [productId], references: [id])
+  productId      String
+  availability   Availability @relation(fields: [availabilityId], references: [id])
+  availabilityId String
+  units          Unit[]
+}
+
+model Unit {
+  id        String  @id @default(uuid())
+  ticket    String?
+  booking   Booking @relation(fields: [bookingId], references: [id])
+  bookingId String
+}
