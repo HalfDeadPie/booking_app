@@ -1,4 +1,4 @@
-# Interview assignment: Booking App
+# Booking App
 
 A simple booking system with availability and pricing logic. Built with koa, prisma, postgresql and react (optional).
 
