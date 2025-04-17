@@ -10,7 +10,7 @@ router.post('/', async (ctx) => {
 
   if (!productId) {
     ctx.status = 400;
-    ctx.body = { error: 'productId is requidred' };
+    ctx.body = { error: 'productId is required/' };
     return;
   }
 
